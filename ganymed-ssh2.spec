@@ -2,7 +2,7 @@
 
 Name:           ganymed-ssh2
 Version:        210
-Release:        %mkrel 2
+Release:        %mkrel 3
 Epoch:          0
 Summary:        SSH-2 protocol implementation in pure Java
 Group:          Development/Java
@@ -12,8 +12,6 @@ Source0:        http://www.ganymed.ethz.ch/ssh2/ganymed-ssh2-build%{version}.zip
 BuildRequires:  jpackage-utils >= 0:1.6
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel
-Requires(post): java-gcj-compat
-Requires(postun): java-gcj-compat
 %else
 BuildArch:      noarch
 BuildRequires:  java-devel >= 0:1.4.2
