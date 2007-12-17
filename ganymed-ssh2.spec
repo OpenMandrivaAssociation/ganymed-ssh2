@@ -16,7 +16,6 @@ BuildRequires:  java-gcj-compat-devel
 BuildArch:      noarch
 BuildRequires:  java-devel >= 0:1.4.2
 %endif
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Ganymed SSH-2 for Java is a library which implements the SSH-2 protocol in pure
