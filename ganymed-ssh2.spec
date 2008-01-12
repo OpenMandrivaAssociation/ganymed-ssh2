@@ -2,7 +2,7 @@
 
 Name:           ganymed-ssh2
 Version:        210
-Release:        %mkrel 4
+Release:        %mkrel 5
 Epoch:          0
 Summary:        SSH-2 protocol implementation in pure Java
 Group:          Development/Java
