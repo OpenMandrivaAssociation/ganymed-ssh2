@@ -1,22 +1,24 @@
 %define gcj_support     1
+%define prerel		beta1
+%define rel		1
 
 Name:           ganymed-ssh2
-Version:        210
-Release:        %mkrel 7
-Epoch:          0
+Version:        251
+Release:        %{?prerel:0.%prerel.}%{rel}
 Summary:        SSH-2 protocol implementation in pure Java
 Group:          Development/Java
 License:        BSD
-URL:            http://www.ganymed.ethz.ch/ssh2/
-Source0:        http://www.ganymed.ethz.ch/ssh2/ganymed-ssh2-build%{version}.zip
+URL:            https://code.google.com/p/ganymed-ssh-2/
+Source0:        https://ganymed-ssh-2.googlecode.com/files/%{name}-build%{version}%{?prerel:%prerel}.zip
+Source1:	build.xml
 BuildRequires:  java-rpmbuild >= 0:1.6
+BuildRequires:  ant
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel
 %else
 BuildArch:      noarch
 BuildRequires:  java-devel >= 0:1.4.2
 %endif
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Ganymed SSH-2 for Java is a library which implements the SSH-2 protocol in pure
@@ -34,18 +36,18 @@ Group:          Development/Java
 Javadoc for ganymed-ssh2.
 
 %prep
-%setup -q -n %{name}-build%{version}
+%setup -q -n %{name}-build%{version}%{?prerel:%prerel}
+cp %{SOURCE1} .
 
 # delete the jars that are in the archive
-%{__rm} %{name}-build%{version}.jar
+%{__rm} %{name}-build%{version}%{?prerel:%prerel}.jar
 
 # fixing wrong-file-end-of-line-encoding warnings
 %{__sed} -i 's/\r$//g' LICENSE.txt README.txt HISTORY.txt faq/FAQ.html
 %{_bindir}/find examples -name \*.java | %{_bindir}/xargs -t %{__sed} -i 's/\r$//g'
 
 %build
-%{javac} -d build src/
-%{jar} -cf %{name}.jar -C build ch
+%ant
 
 # Link source files to fix -debuginfo generation.
 %{__rm} -f ch
@@ -61,20 +63,18 @@ Javadoc for ganymed-ssh2.
 
 # javadoc
 %{__mkdir_p} %{buildroot}%{_javadocdir}/%{name}-%{version}
-%{__cp} -a javadoc/* \
+cp -a javadoc/* \
   %{buildroot}%{_javadocdir}/%{name}-%{version}
 
 # gcj support
 %if %{gcj_support}
+export RPM_PACKAGE_NAME=%{name}
 %{_bindir}/aot-compile-rpm
 %endif
 
 pushd %{buildroot}%{_javadir}/
 %{__ln_s} %{name}-%{version}.jar %{name}.jar
 popd
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %if %{gcj_support}
 %post
@@ -95,5 +95,3 @@ popd
 %files javadoc
 %defattr(0644,root,root,0755)
 %{_javadocdir}/%{name}-%{version}
-
-
