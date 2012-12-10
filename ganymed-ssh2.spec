@@ -95,3 +95,57 @@ popd
 %files javadoc
 %defattr(0644,root,root,0755)
 %{_javadocdir}/%{name}-%{version}
+
+
+%changelog
+* Tue Feb 28 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 251-0.beta1.1
++ Revision: 781277
+- latest version 251beta1
+- build.xml from Fedora
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - rebuild
+    - kill re-definition of %%buildroot on Pixel's request
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - rebuild
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+  + Anssi Hannula <anssi@mandriva.org>
+    - buildrequire java-rpmbuild, i.e. build with icedtea on x86(_64)
+
+* Sat Sep 15 2007 Anssi Hannula <anssi@mandriva.org> 0:210-3mdv2008.0
++ Revision: 87376
+- rebuild to filter out autorequires of GCJ AOT objects
+- remove unnecessary Requires(post) on java-gcj-compat
+
+* Sun Sep 09 2007 Pascal Terjan <pterjan@mandriva.org> 0:210-2mdv2008.0
++ Revision: 82973
+- rebuild
+
+
+* Mon Jan 15 2007 David Walluck <walluck@mandriva.org> 210-1mdv2007.0
++ Revision: 109359
+- 210
+- Import ganymed-ssh2
+
+* Wed Jul 19 2006 David Walluck <walluck@mandriva.org> 0:209-4mdv2007.0
+- release
+
+* Mon Jun 26 2006 Robert Marcano <robert@marcanoonline.com> 209-4
+- created javadoc package
+- renamed to ganymed-ssh2
+
+* Mon Jun 12 2006 Robert Marcano <robert@marcanoonline.com> 209-3
+- rpmlint fixes and debuginfo generation workaround
+- doc files added
+
+* Mon May 29 2006 Robert Marcano <robert@marcanoonline.com> 209-2
+- review updates
+
+* Mon May 08 2006 Robert Marcano <robert@marcanoonline.com> 209-1
+- initial version
+
